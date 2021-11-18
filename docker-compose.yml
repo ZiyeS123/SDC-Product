@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  server:
+    build: .
+    container_name: server
+    ports:
+      - "3000:3000"
+
+  db:
+    image: postgres:alpine
+    container_name: db
+    restart: always
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+    ports:
+      - '5432:5432'
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  volumes:
+    db-data:
+
