@@ -47,3 +47,10 @@ CREATE TABLE IF NOT EXISTS inventory (
   quantity INTEGER,
   CONSTRAINT fk_inventory FOREIGN KEY(style_id) REFERENCES styles(id)
 );
+
+-- \copy products FROM '/Users/ziye/HR/SDCdata/product.csv' DELIMITER ',' CSV HEADER
+-- \copy related_products FROM '/Users/ziye/HR/SDCdata/related.csv' DELIMITER ',' CSV HEADER
+-- \copy features FROM '/Users/ziye/HR/SDCdata/features.csv' DELIMITER ',' CSV
+-- \copy styles FROM '/Users/ziye/HR/SDCdata/styles.csv' DELIMITER ',' CSV HEADER
+-- \copy photos FROM '/Users/ziye/HR/SDCdata/photos.csv' DELIMITER ',' CSV HEADER
+-- \copy inventoru FROM '/Users/ziye/HR/SDCdata/inventory.csv' DELIMITER ',' CSV HEADER
