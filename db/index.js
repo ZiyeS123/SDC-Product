@@ -14,4 +14,4 @@ pool.on('error', (err, client) => {
 //   console.log('pool connected')
 // })
 
-module.exports.pool = pool;
+module.exports = pool;
