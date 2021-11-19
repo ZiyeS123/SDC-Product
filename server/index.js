@@ -9,12 +9,9 @@ const { getProductList, getProductInfo, getRelatedProducts } = require('./contro
 app.use(express.json());
 app.use('/products', router);
 
-
 app.listen(PORT, function () {
   console.log(`listening on port ${PORT}!`)}
 )
-
-//==========================request handlers==================================
 
 app.get('/', (req, res) => {
   res.json("🐳")

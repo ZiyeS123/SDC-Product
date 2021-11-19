@@ -36,6 +36,14 @@ module.exports = {
   },
 
   getProductStyles: function(req, res) {
+    const id = req.params.product_id;
+    readProductStyles(id)
+      .then((results) => {
+        res.send(results);
+      })
+      .catch((err) => {
+        console.log('ERROR IN get products/:product_id', err);
+      })
 
   }
 
