@@ -58,34 +58,26 @@ module.exports = {
 
   readRelatedProducts: function(id) {
     const query = `
-    SELECT row_to_json(t)
-    FROM (
-      SELECT array_agg(json_build_array(related_id)) d
-      FROM (
-        SELECT related_id
-        FROM related_products
-        WHERE product_id = ${id}
-      ) d
-    ) t`
-
+    SELECT array_agg(r.related_id)
+    FROM related_products r
+    WHERE r.product_id = ${id}
+    `
     return pool.connect()
       .then((client) => {
         return client
           .query(query)
           .then((res) => {
             client.release()
-            const resArr = res.rows[0].row_to_json.d;
-            let relatedId = [];
-            resArr.forEach((item) => {
-              relatedId.push(item[0]);
-            })
-            return relatedId;
+            return res.rows[0].array_agg
           })
           .catch((err) => {
             client.release()
             console.log('ERROR IN readRelatedProducts', err);
           })
       })
+  },
+
+  readProductStyles: function(id) {
 
   }
 }
