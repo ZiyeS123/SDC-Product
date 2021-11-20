@@ -8,13 +8,13 @@ services:
       - "3000:3000"
 
   db:
-    image: postgres:alpine
+    image: postgres
     container_name: db
     restart: always
     volumes:
       - db-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_PASSWORD: postgresql
     ports:
       - '5432:5432'
 
@@ -24,6 +24,21 @@ services:
     ports:
       - 8080:8080
 
-  volumes:
-    db-data:
+volumes:
+  db-data:
 
+
+
+# postgres:
+#     image: postgres:latest # publicly available mongodb image from dockerhub
+#     restart: always
+#     ports: # port access needed in order to communicate with the other services
+#       - '5432:5432'
+#     environment:
+#       POSTGRES_DB: pgdb
+#       POSTGRES_PASSWORD: postgres
+#       POSTGRES_USER: postgres
+#     networks: # allows the service to talk to one another while providing isolation from other docker containers that happen to be running on the same host
+#       - sdc-qa # talks to other services via line 27 mern-app
+#     volumes:
+#       - postgres-data:/data/db

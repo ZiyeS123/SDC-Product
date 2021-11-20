@@ -53,4 +53,11 @@ CREATE TABLE IF NOT EXISTS inventory (
 -- \copy features FROM '/Users/ziye/HR/SDCdata/features.csv' DELIMITER ',' CSV
 -- \copy styles FROM '/Users/ziye/HR/SDCdata/styles.csv' DELIMITER ',' CSV HEADER
 -- \copy photos FROM '/Users/ziye/HR/SDCdata/photos.csv' DELIMITER ',' CSV HEADER
--- \copy inventoru FROM '/Users/ziye/HR/SDCdata/inventory.csv' DELIMITER ',' CSV HEADER
+-- \copy inventory FROM '/Users/ziye/HR/SDCdata/inventory.csv' DELIMITER ',' CSV HEADER
+
+-- CREATE INDEX styles_pid_idx ON styles (product_id);
+-- CREATE INDEX features_pid_idx ON features (product_id);
+-- CREATE INDEX related_pid_idx ON related_products (product_id);
+-- CREATE INDEX photos_sid_idx ON photos (style_id);
+-- CREATE INDEX inventory_sid_idx ON inventory (style_id);
+
