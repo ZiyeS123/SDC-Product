@@ -1,0 +1,14 @@
+
+config:
+  target: 'http://localhost:3000'
+  phases:
+    - duration: 20
+      arrivalRate: 500
+      name: 500/s for 20s
+scenarios:
+  - name: 'getProductList'
+    flow:
+      - get:
+          url: '/products/list'
+
+# capacity: 500-550/s for 20, error < 1%,
