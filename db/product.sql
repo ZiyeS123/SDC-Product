@@ -61,3 +61,4 @@ CREATE TABLE IF NOT EXISTS inventory (
 -- CREATE INDEX photos_sid_idx ON photos (style_id);
 -- CREATE INDEX inventory_sid_idx ON inventory (style_id);
 
+--\copy products FROM '/var/lib/postgresql/data/product.csv' DELIMITER ',' CSV HEADER
