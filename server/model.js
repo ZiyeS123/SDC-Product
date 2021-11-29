@@ -81,34 +81,32 @@ module.exports = {
     const query = `
     SELECT row_to_json(z)
     FROM (
-      SELECT p.id AS product_id,
-      (
+      SELECT p.id AS product_id, (
         SELECT array_agg(row_to_json(y))
-        FROM (
-            SELECT s.id as style_id, s.name, s.original_price, s.sale_price, s.default_style AS default,
-            (
-              SELECT array_to_json(array_agg(row_to_json(d)))
-              FROM (
-                SELECT p.thumbnail_url, p.url
-                FROM photos p
-                WHERE p.style_id = s.id
-              ) d
-            ) AS photos,
-           (
-             SELECT array_agg(row_to_json(a))
-             FROM (
-               SELECT i.id, i.quantity, i.size
-               FROM inventory i
-               WHERE i.style_id = s.id
-             ) a
-           ) AS skus
-            FROM styles s
-            WHERE s.product_id = p.id
-        ) y
+        FROM
+        (
+          SELECT s.id as style_id, s.name, s.original_price, s.sale_price, s.default_style AS default, (
+            SELECT array_to_json(array_agg(row_to_json(d)))
+            FROM (
+              SELECT p.thumbnail_url, p.url
+              FROM photos p
+              WHERE p.style_id = s.id ) d
+        ) AS photos,
+        (
+          SELECT jsonb_object_agg(
+            i.id,
+            json_build_object(
+              'quantity', i.quantity,
+              'size', i.size)
+          ) AS skus
+					FROM inventory i
+					WHERE i.style_id = s.id
+        )
+        FROM styles s
+        WHERE s.product_id = p.id ) y
       ) AS results
       FROM products p
-      WHERE p.id = ${id}
-    ) z`
+      WHERE p.id = ${id} ) z`
 
     return pool.connect()
       .then((client) => {
