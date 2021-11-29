@@ -48,12 +48,6 @@ CREATE TABLE IF NOT EXISTS inventory (
   CONSTRAINT fk_inventory FOREIGN KEY(style_id) REFERENCES styles(id)
 );
 
--- \copy products FROM '/Users/ziye/HR/SDCdata/product.csv' DELIMITER ',' CSV HEADER
--- \copy related_products FROM '/Users/ziye/HR/SDCdata/related.csv' DELIMITER ',' CSV HEADER
--- \copy features FROM '/Users/ziye/HR/SDCdata/features.csv' DELIMITER ',' CSV
--- \copy styles FROM '/Users/ziye/HR/SDCdata/styles.csv' DELIMITER ',' CSV HEADER
--- \copy photos FROM '/Users/ziye/HR/SDCdata/photos.csv' DELIMITER ',' CSV HEADER
--- \copy inventory FROM '/Users/ziye/HR/SDCdata/inventory.csv' DELIMITER ',' CSV HEADER
 
 -- CREATE INDEX styles_pid_idx ON styles (product_id);
 -- CREATE INDEX features_pid_idx ON features (product_id);
@@ -61,4 +55,18 @@ CREATE TABLE IF NOT EXISTS inventory (
 -- CREATE INDEX photos_sid_idx ON photos (style_id);
 -- CREATE INDEX inventory_sid_idx ON inventory (style_id);
 
---\copy products FROM '/var/lib/postgresql/data/product.csv' DELIMITER ',' CSV HEADER
+--------------MOVE CSV FILES FROM LOCAL TO DOCKER CONTAINER-----------------------------
+-- docker cp /Users/ziye/HR/SDCdata/product.csv db:var/lib/postgresql/data
+-- docker cp /Users/ziye/HR/SDCdata/related.csv db:var/lib/postgresql/data
+-- docker cp /Users/ziye/HR/SDCdata/features.csv db:var/lib/postgresql/data
+-- docker cp /Users/ziye/HR/SDCdata/styles.csv db:var/lib/postgresql/data
+-- docker cp /Users/ziye/HR/SDCdata/photos.csv db:var/lib/postgresql/data
+-- docker cp /Users/ziye/HR/SDCdata/skus.csv db:var/lib/postgresql/data
+
+-----------------LOAD DATA FROM CSV FILES TO DATABASE-----------------------------------
+-- \copy products FROM '/var/lib/postgresql/data/product.csv' DELIMITER ',' CSV HEADER
+-- \copy related_products FROM '/var/lib/postgresql/data/related.csv' DELIMITER ',' CSV HEADER
+-- \copy features FROM '/var/lib/postgresql/data/features.csv' DELIMITER ',' CSV
+-- \copy styles FROM '/var/lib/postgresql/data/styles.csv' DELIMITER ',' CSV HEADER
+-- \copy photos FROM '/var/lib/postgresql/data/photos.csv' DELIMITER ',' CSV HEADER
+-- \copy inventory FROM '/var/lib/postgresql/data/skus.csv' DELIMITER ',' CSV HEADER
