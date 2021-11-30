@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 })
 
 app.get("/loaderio-c94e2303cf9ee4a5d51191949bc39b8d.txt", (req, res) => {
-  res.sendFile(path.join(__dirname, "./loaderio.txt"));
+  res.sendFile(`${__dirname}/./loaderio.txt`);
 });
 
 
