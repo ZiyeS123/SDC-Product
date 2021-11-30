@@ -49,11 +49,6 @@ CREATE TABLE IF NOT EXISTS inventory (
 );
 
 
--- CREATE INDEX styles_pid_idx ON styles (product_id);
--- CREATE INDEX features_pid_idx ON features (product_id);
--- CREATE INDEX related_pid_idx ON related_products (product_id);
--- CREATE INDEX photos_sid_idx ON photos (style_id);
--- CREATE INDEX inventory_sid_idx ON inventory (style_id);
 
 --------------MOVE CSV FILES FROM LOCAL TO DOCKER CONTAINER-----------------------------
 -- docker cp /Users/ziye/HR/SDCdata/product.csv db:var/lib/postgresql/data
@@ -70,3 +65,10 @@ CREATE TABLE IF NOT EXISTS inventory (
 -- \copy styles FROM '/var/lib/postgresql/data/styles.csv' DELIMITER ',' CSV HEADER
 -- \copy photos FROM '/var/lib/postgresql/data/photos.csv' DELIMITER ',' CSV HEADER
 -- \copy inventory FROM '/var/lib/postgresql/data/skus.csv' DELIMITER ',' CSV HEADER
+
+-----------------CREATE INDEXES-----------------------------------
+-- CREATE INDEX styles_pid_idx ON styles (product_id);
+-- CREATE INDEX features_pid_idx ON features (product_id);
+-- CREATE INDEX related_pid_idx ON related_products (product_id);
+-- CREATE INDEX photos_sid_idx ON photos (style_id);
+-- CREATE INDEX inventory_sid_idx ON inventory (style_id);
