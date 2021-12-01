@@ -40,12 +40,10 @@ module.exports = {
     redisClient.get(redisKey, (err, data) => {
       if (err) throw err;
       if (data !== null) {
-        //console.log('🌈data already cached')
         res.send(JSON.parse(data))
       } else {
         readProductInfo(id)
           .then((results) => {
-            //console.log('🌈data not cached')
             redisClient.setex(redisKey, 3600, JSON.stringify(results));
             res.send(results);
           })
@@ -58,25 +56,44 @@ module.exports = {
 
   getRelatedProducts: function(req, res) {
     const id = req.params.product_id;
-    readRelatedProducts(id)
-      .then((results) => {
-        res.send(results);
-      })
-      .catch((err) => {
-        console.log('ERROR IN get products/:product_id', err);
-      })
+    const redisKey = `getRelatedProducts:${id}`;
+
+    redisClient.get(redisKey, (err, data) => {
+      if (err) throw err;
+      if (data !== null) {
+        res.send(JSON.parse(data))
+      } else {
+        readRelatedProducts(id)
+          .then((results) => {
+            redisClient.setex(redisKey, 3600, JSON.stringify(results));
+            res.send(results);
+          })
+          .catch((err) => {
+            console.log('ERROR IN get products/:product_id', err);
+          })
+      }
+    })
   },
 
   getProductStyles: function(req, res) {
     const id = req.params.product_id;
-    readProductStyles(id)
-      .then((results) => {
-        res.send(results);
-      })
-      .catch((err) => {
-        console.log('ERROR IN get products/:product_id', err);
-      })
+    const redisKey = `getRelatedProducts:${id}`;
 
+    redisClient.get(redisKey, (err, data) => {
+      if (err) throw err;
+      if (data !== null) {
+        res.send(JSON.parse(data))
+      } else {
+        readProductStyles(id)
+          .then((results) => {
+            redisClient.setex(redisKey, 3600, JSON.stringify(results));
+            res.send(results);
+          })
+          .catch((err) => {
+            console.log('ERROR IN get products/:product_id', err);
+          })
+      }
+    })
   }
 
 }
