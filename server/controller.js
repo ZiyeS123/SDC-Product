@@ -1,14 +1,10 @@
 const { readProductList, readProductInfo, readRelatedProducts, readProductStyles } = require('./model.js')
 const redis = require('redis');
-
-//connect to redis client
-//const REDIS_PORT = process.env.PORT || 6379;
 const redisClient = redis.createClient();
 
 redisClient.on('err', (err) => {
   console.log('Redis Client Error', err)
 });
-
 
 module.exports = {
   getProductList: function(req, res) {
@@ -28,6 +24,7 @@ module.exports = {
           })
           .catch((err) => {
             console.log('ERROR IN get products/list', err);
+            res.status(400).send('Bad Request');
           })
       }
     })
@@ -49,6 +46,7 @@ module.exports = {
           })
           .catch((err) => {
             console.log('ERROR IN get products/:product_id', err);
+            res.status(400).send('Bad Request');
           })
       }
     })
@@ -70,6 +68,7 @@ module.exports = {
           })
           .catch((err) => {
             console.log('ERROR IN get products/:product_id', err);
+            res.status(400).send('Bad Request');
           })
       }
     })
@@ -91,6 +90,7 @@ module.exports = {
           })
           .catch((err) => {
             console.log('ERROR IN get products/:product_id', err);
+            res.status(400).send('Bad Request');
           })
       }
     })
