@@ -7,7 +7,9 @@ The goal of this project was to build a scalable RESTful API service for a retai
 1. [Installing Dependencies](#Installing-Dependencies)
 2. [Tech Stack](#Tech-Stack)
 3. [Routes](#Routes)
-4. [Load Testing](#Load-Testing)
+4. [Database Schema](#Database-Schema)
+5. [Testing](#Load-Testing)
+6. [Engineering Journal](https://gist.github.com/ZiyeS123/6e2568bf2b7a4cdfb614b5b09d13e4e9)
 
 ---
 
